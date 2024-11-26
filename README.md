@@ -11,29 +11,29 @@ This study uses the SemEval 2013 Shared Task #12 dataset (Navigli and Jurgens, 2
 ## Model Descriptions
 ### Baseline Method
 The baseline, implemented in Method1.py, predicts the most frequent sense of a word by selecting the first synset in WordNet for a given lemma using the wordnet.synsets function. This straightforward approach requires no training or hyperparameter tuning, making it a quick benchmark for WSD tasks. Below is a sample output comparing the predicted and gold labels from the baseline evaluation.<br>
-d002.s001.t001: Lemma=victory, Predicted=victory%1:11:00::, Gold=victory%1:11:00::
-d002.s002.t006: Lemma=loss, Predicted=loss%1:21:01::, Gold=loss%1:04:00::
+* d002.s001.t001: Lemma=victory, Predicted=victory%1:11:00::, Gold=victory%1:11:00::
+* d002.s002.t006: Lemma=loss, Predicted=loss%1:21:01::, Gold=loss%1:04:00::
 
 ### Lesk Algorithm
 The Lesk algorithm from nltk.wsd, found in Method1.py, was enhanced with POS tagging, defaulting missing tags to nouns for improved performance. A configurable filter_text variable controlled preprocessing: enabling it removed stop words and punctuation, while disabling it preserved the raw context. Experiments revealed that lowercasing slightly reduced development accuracy (~0.18%) and was therefore excluded. The unfiltered approach (filter_text=False) outperformed the filtered version on the development set (37.11% vs. 35.57%), leading to its selection for test evaluation. Below is a sample output comparing predicted and gold labels using the Lesk algorithm.<br>
-d002.s001.t001: Lemma: victory, Predicted: victory%1:11:00::, Gold: victory%1:11:00::
-d002.s002.t006: Lemma: loss, Predicted: loss%1:21:00::, Gold: loss%1:04:00::
+* d002.s001.t001: Lemma: victory, Predicted: victory%1:11:00::, Gold: victory%1:11:00::
+* d002.s002.t006: Lemma: loss, Predicted: loss%1:21:00::, Gold: loss%1:04:00::
 
 ### Graph, PMI, and Hybrid Solutions
-The second solution for word sense disambiguation (WSD), implemented in Method2.py, builds upon the ideas outlined in [^1]. This graph-based, unsupervised method exploits semantic relationships in WordNet, such as hypernyms, hyponyms, and meronyms, to form a graph of interconnected synsets. Unlike [^1], which prioritizes semantic relatedness measures, this approach applies PageRank to compute centrality scores, predicting the sense with the highest rank as the most appropriate meaning.
+The second solution for word sense disambiguation (WSD), implemented in Method2.py, builds upon the ideas outlined in [1]. This graph-based, unsupervised method exploits semantic relationships in WordNet, such as hypernyms, hyponyms, and meronyms, to form a graph of interconnected synsets. Unlike [1], which prioritizes semantic relatedness measures, this approach applies PageRank to compute centrality scores, predicting the sense with the highest rank as the most appropriate meaning.
 To improve the graph-based solution, a PMI-based method was introduced to generate embeddings for synsets. By calculating cosine similarity between context vectors and synset embeddings, the synset with the highest similarity score was selected as the predicted sense. This PMI method was first evaluated as a standalone approach before being integrated into a hybrid method alongside the graph-based approach.
 The hybrid approach combined graph centrality with PMI embeddings, ranking synsets through a blend of centrality and similarity scores, achieving a ~5% improvement over the graph-based method. Interestingly, the standalone PMI-based method outperformed both the hybrid and graph-based approaches, achieving ~3% and ~7% higher development accuracy, respectively. This advantage is likely due to its exclusive focus on semantic similarity, avoiding the potential noise introduced by combining graph-based centrality. On the development set, the graph-based, PMI-based, and hybrid methods achieved accuracies of 43.30%, 50.52%, and 47.94%, respectively. With the PMI-based method demonstrating the best performance, it was further evaluated on the test set. The sample outputs below show the predicted and gold labels for each method. <br>
-Graph-based d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
-Graph-based d002.s002.t002: Instance=loss, Prediction=inflict%2:32:00::, Gold=loss%1:04:00::
-PMI-based d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
-PMI-based d002.s002.t006: Instance=loss, Prediction=loss%1:21:01::, Gold=loss%1:04:00::
-Hybrid d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
-Hybrid d002.s002.t006: Instance=loss, Prediction=loss%1:21:01::, Gold=loss%1:04:00::
+* Graph-based d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
+* Graph-based d002.s002.t002: Instance=loss, Prediction=inflict%2:32:00::, Gold=loss%1:04:00::
+* PMI-based d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
+* PMI-based d002.s002.t006: Instance=loss, Prediction=loss%1:21:01::, Gold=loss%1:04:00::
+* Hybrid d002.s001.t001: Instance=victory, Prediction=victory%1:11:00::, Gold=victory%1:11:00::
+* Hybrid d002.s002.t006: Instance=loss, Prediction=loss%1:21:01::, Gold=loss%1:04:00::
 
 ### kanishka/GlossBERT Pre-Trained Online LLM from Hugging Face
-Building on the successful use of embeddings in the previous section, GlossBERT, a pre-trained transformer model from [^2], was further fine-tuned for the WSD task using PyTorch. Regularization techniques—including the AdamW optimizer with weight decay, gradient clipping, and a learning rate scheduler—were applied to mitigate overfitting. Training was limited to 4 epochs, yielding optimal results. GlossBERT achieved the best performance, with a development accuracy of 76.41% and a test accuracy of 57.73%, surpassing all prior non-baseline solutions. Sample outputs are provided below.<br>
-d001.s001.t002: Lemma: group, Predicted: group%1:03:00::, Gold: group%1:03:00::
-d001.s002.t001: Lemma: climate, Predicted: climate%1:26:01::, Gold: climate%1:26:00::
+Building on the successful use of embeddings in the previous section, GlossBERT, a pre-trained transformer model from [2], was further fine-tuned for the WSD task using PyTorch. Regularization techniques—including the AdamW optimizer with weight decay, gradient clipping, and a learning rate scheduler—were applied to mitigate overfitting. Training was limited to 4 epochs, yielding optimal results. GlossBERT achieved the best performance, with a development accuracy of 76.41% and a test accuracy of 57.73%, surpassing all prior non-baseline solutions. Sample outputs are provided below.<br>
+* d001.s001.t002: Lemma: group, Predicted: group%1:03:00::, Gold: group%1:03:00::
+* d001.s002.t001: Lemma: climate, Predicted: climate%1:26:01::, Gold: climate%1:26:00::
 
 ## Analysis of Results
 | Model                | Development Accuracy | Test Accuracy |
