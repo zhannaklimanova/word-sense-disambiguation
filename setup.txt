@@ -1,0 +1,118 @@
+klizha => ~/Developer/word_sense_disambiguation $ python3 -m venv .venv
+klizha => ~/Developer/word_sense_disambiguation $ source .venv/bin/activate
+(.venv) klizha => ~/Developer/word_sense_disambiguation $ which python
+/Users/klizha/Developer/word_sense_disambiguation/.venv/bin/python
+(.venv) klizha => ~/Developer/word_sense_disambiguation $ python3 -m pip install --upgrade pip
+Requirement already satisfied: pip in ./.venv/lib/python3.11/site-packages (22.3.1)
+Collecting pip
+  Downloading pip-24.3.1-py3-none-any.whl (1.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 3.2 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 22.3.1
+    Uninstalling pip-22.3.1:
+      Successfully uninstalled pip-22.3.1
+Successfully installed pip-24.3.1
+(.venv) klizha => ~/Developer/word_sense_disambiguation $ python3 -m pip --version
+pip 24.3.1 from /Users/klizha/Developer/word_sense_disambiguation/.venv/lib/python3.11/site-packages/pip (python 3.11)
+(.venv) klizha => ~/Developer/word_sense_disambiguation $ pip3 install -r requirements.txt
+Collecting nltk==3.9.1 (from -r requirements.txt (line 1))
+  Using cached nltk-3.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting torch==2.5.1 (from -r requirements.txt (line 2))
+  Downloading torch-2.5.1-cp311-none-macosx_11_0_arm64.whl.metadata (28 kB)
+Collecting transformers==4.46.1 (from -r requirements.txt (line 3))
+  Downloading transformers-4.46.1-py3-none-any.whl.metadata (44 kB)
+Collecting scikit-learn==1.5.2 (from -r requirements.txt (line 4))
+  Using cached scikit_learn-1.5.2-cp311-cp311-macosx_12_0_arm64.whl.metadata (13 kB)
+Collecting xmltodict==0.14.2 (from -r requirements.txt (line 5))
+  Downloading xmltodict-0.14.2-py2.py3-none-any.whl.metadata (8.0 kB)
+Collecting click (from nltk==3.9.1->-r requirements.txt (line 1))
+  Using cached click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting joblib (from nltk==3.9.1->-r requirements.txt (line 1))
+  Using cached joblib-1.4.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting regex>=2021.8.3 (from nltk==3.9.1->-r requirements.txt (line 1))
+  Using cached regex-2024.9.11-cp311-cp311-macosx_11_0_arm64.whl.metadata (40 kB)
+Collecting tqdm (from nltk==3.9.1->-r requirements.txt (line 1))
+  Downloading tqdm-4.66.6-py3-none-any.whl.metadata (57 kB)
+Collecting filelock (from torch==2.5.1->-r requirements.txt (line 2))
+  Downloading filelock-3.16.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting typing-extensions>=4.8.0 (from torch==2.5.1->-r requirements.txt (line 2))
+  Using cached typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)
+Collecting networkx (from torch==2.5.1->-r requirements.txt (line 2))
+  Downloading networkx-3.4.2-py3-none-any.whl.metadata (6.3 kB)
+Collecting jinja2 (from torch==2.5.1->-r requirements.txt (line 2))
+  Downloading jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting fsspec (from torch==2.5.1->-r requirements.txt (line 2))
+  Downloading fsspec-2024.10.0-py3-none-any.whl.metadata (11 kB)
+Collecting sympy==1.13.1 (from torch==2.5.1->-r requirements.txt (line 2))
+  Downloading sympy-1.13.1-py3-none-any.whl.metadata (12 kB)
+Collecting huggingface-hub<1.0,>=0.23.2 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading huggingface_hub-0.26.2-py3-none-any.whl.metadata (13 kB)
+Collecting numpy>=1.17 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading numpy-2.1.2-cp311-cp311-macosx_14_0_arm64.whl.metadata (60 kB)
+Collecting packaging>=20.0 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Using cached packaging-24.1-py3-none-any.whl.metadata (3.2 kB)
+Collecting pyyaml>=5.1 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading PyYAML-6.0.2-cp311-cp311-macosx_11_0_arm64.whl.metadata (2.1 kB)
+Collecting requests (from transformers==4.46.1->-r requirements.txt (line 3))
+  Using cached requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+Collecting safetensors>=0.4.1 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading safetensors-0.4.5-cp311-cp311-macosx_11_0_arm64.whl.metadata (3.8 kB)
+Collecting tokenizers<0.21,>=0.20 (from transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading tokenizers-0.20.1-cp311-cp311-macosx_11_0_arm64.whl.metadata (6.7 kB)
+Collecting scipy>=1.6.0 (from scikit-learn==1.5.2->-r requirements.txt (line 4))
+  Using cached scipy-1.14.1-cp311-cp311-macosx_14_0_arm64.whl.metadata (60 kB)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn==1.5.2->-r requirements.txt (line 4))
+  Using cached threadpoolctl-3.5.0-py3-none-any.whl.metadata (13 kB)
+Collecting mpmath<1.4,>=1.1.0 (from sympy==1.13.1->torch==2.5.1->-r requirements.txt (line 2))
+  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch==2.5.1->-r requirements.txt (line 2))
+  Downloading MarkupSafe-3.0.2-cp311-cp311-macosx_11_0_arm64.whl.metadata (4.0 kB)
+Collecting charset-normalizer<4,>=2 (from requests->transformers==4.46.1->-r requirements.txt (line 3))
+  Downloading charset_normalizer-3.4.0-cp311-cp311-macosx_11_0_arm64.whl.metadata (34 kB)
+Collecting idna<4,>=2.5 (from requests->transformers==4.46.1->-r requirements.txt (line 3))
+  Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting urllib3<3,>=1.21.1 (from requests->transformers==4.46.1->-r requirements.txt (line 3))
+  Using cached urllib3-2.2.3-py3-none-any.whl.metadata (6.5 kB)
+Collecting certifi>=2017.4.17 (from requests->transformers==4.46.1->-r requirements.txt (line 3))
+  Using cached certifi-2024.8.30-py3-none-any.whl.metadata (2.2 kB)
+Using cached nltk-3.9.1-py3-none-any.whl (1.5 MB)
+Downloading torch-2.5.1-cp311-none-macosx_11_0_arm64.whl (63.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.9/63.9 MB 42.1 MB/s eta 0:00:00
+Downloading transformers-4.46.1-py3-none-any.whl (10.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.0/10.0 MB 70.1 MB/s eta 0:00:00
+Using cached scikit_learn-1.5.2-cp311-cp311-macosx_12_0_arm64.whl (11.0 MB)
+Downloading xmltodict-0.14.2-py2.py3-none-any.whl (10.0 kB)
+Downloading sympy-1.13.1-py3-none-any.whl (6.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 46.3 MB/s eta 0:00:00
+Downloading huggingface_hub-0.26.2-py3-none-any.whl (447 kB)
+Downloading fsspec-2024.10.0-py3-none-any.whl (179 kB)
+Using cached joblib-1.4.2-py3-none-any.whl (301 kB)
+Downloading numpy-2.1.2-cp311-cp311-macosx_14_0_arm64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 46.5 MB/s eta 0:00:00
+Using cached packaging-24.1-py3-none-any.whl (53 kB)
+Downloading PyYAML-6.0.2-cp311-cp311-macosx_11_0_arm64.whl (172 kB)
+Using cached regex-2024.9.11-cp311-cp311-macosx_11_0_arm64.whl (284 kB)
+Downloading safetensors-0.4.5-cp311-cp311-macosx_11_0_arm64.whl (381 kB)
+Using cached scipy-1.14.1-cp311-cp311-macosx_14_0_arm64.whl (23.1 MB)
+Using cached threadpoolctl-3.5.0-py3-none-any.whl (18 kB)
+Downloading tokenizers-0.20.1-cp311-cp311-macosx_11_0_arm64.whl (2.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 44.6 MB/s eta 0:00:00
+Downloading tqdm-4.66.6-py3-none-any.whl (78 kB)
+Using cached typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+Using cached click-8.1.7-py3-none-any.whl (97 kB)
+Downloading filelock-3.16.1-py3-none-any.whl (16 kB)
+Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
+Downloading networkx-3.4.2-py3-none-any.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 39.8 MB/s eta 0:00:00
+Using cached requests-2.32.3-py3-none-any.whl (64 kB)
+Using cached certifi-2024.8.30-py3-none-any.whl (167 kB)
+Downloading charset_normalizer-3.4.0-cp311-cp311-macosx_11_0_arm64.whl (118 kB)
+Using cached idna-3.10-py3-none-any.whl (70 kB)
+Downloading MarkupSafe-3.0.2-cp311-cp311-macosx_11_0_arm64.whl (12 kB)
+Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 23.1 MB/s eta 0:00:00
+Using cached urllib3-2.2.3-py3-none-any.whl (126 kB)
+Installing collected packages: mpmath, xmltodict, urllib3, typing-extensions, tqdm, threadpoolctl, sympy, safetensors, regex, pyyaml, packaging, numpy, networkx, MarkupSafe, joblib, idna, fsspec, filelock, click, charset-normalizer, certifi, scipy, requests, nltk, jinja2, torch, scikit-learn, huggingface-hub, tokenizers, transformers
+Successfully installed MarkupSafe-3.0.2 certifi-2024.8.30 charset-normalizer-3.4.0 click-8.1.7 filelock-3.16.1 fsspec-2024.10.0 huggingface-hub-0.26.2 idna-3.10 jinja2-3.1.4 joblib-1.4.2 mpmath-1.3.0 networkx-3.4.2 nltk-3.9.1 numpy-2.1.2 packaging-24.1 pyyaml-6.0.2 regex-2024.9.11 requests-2.32.3 safetensors-0.4.5 scikit-learn-1.5.2 scipy-1.14.1 sympy-1.13.1 threadpoolctl-3.5.0 tokenizers-0.20.1 torch-2.5.1 tqdm-4.66.6 transformers-4.46.1 typing-extensions-4.12.2 urllib3-2.2.3 xmltodict-0.14.2
+(.venv) klizha => ~/Developer/word_sense_disambiguation $ python3 -m pip freeze > requirements.lock

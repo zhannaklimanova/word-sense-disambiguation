@@ -1,0 +1,5 @@
+nltk==3.9.1
+torch==2.5.1
+transformers==4.46.1
+scikit-learn==1.5.2
+xmltodict==0.14.2
